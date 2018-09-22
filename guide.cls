@@ -51,3 +51,6 @@
 
 \titleformat{\section}
   {\fontspec{Avenir LT 65 Medium}\huge\color{bannerColour}}{\llap{\parbox{\titleindent}{\thesection\hfill}}}{0em}{}
+
+\titleformat{\paragraph}
+  [{runin}]{\bf\fontspec{Avenir LT 65 Medium}\color{bannerColour}}{}{}{}
