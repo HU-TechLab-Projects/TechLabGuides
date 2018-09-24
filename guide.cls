@@ -13,7 +13,7 @@
 \def\bannerColour{bannerColour}
 
 \RequirePackage[unicode, bookmarks, colorlinks, breaklinks, urlcolor=bannerColour]{hyperref}
-\RequirePackage{fontspec,xunicode,eso-pic,graphicx,ifthen,titlesec,fontawesome,eurosym}
+\RequirePackage{fontspec,xunicode,eso-pic,graphicx,caption,ifthen,titlesec,fontawesome,eurosym}
 
 \setlength\parindent{0in}
 \defaultfontfeatures{Mapping=tex-text}
@@ -51,6 +51,9 @@
 
 \titleformat{\section}
   {\fontspec{Avenir LT 65 Medium}\huge\color{bannerColour}}{\llap{\parbox{\titleindent}{\thesection\hfill}}}{0em}{}
+
+\titleformat{\subsection}
+  {\fontspec{Avenir LT 65 Medium}\Large\color{bannerColour}}{\llap{\parbox{\titleindent}{\thesubsection\hfill}}}{0em}{}
 
 \titleformat{\paragraph}
   [{runin}]{\bf\fontspec{Avenir LT 65 Medium}\color{bannerColour}}{}{}{}
