@@ -4,7 +4,6 @@
 \LoadClassWithOptions{article}
 
 \RequirePackage[table]{xcolor}
-\RequirePackage{pstricks}
 \RequirePackage[dutch]{babel}
 \RequirePackage[autostyle]{csquotes}
 \RequirePackage[a4paper, textwidth=6.5in, textheight=8.5in, top=5cm, marginparsep=7pt, marginparwidth=.6in]{geometry}
@@ -13,7 +12,7 @@
 \def\bannerColour{bannerColour}
 
 \RequirePackage[unicode, bookmarks, colorlinks, breaklinks, urlcolor=bannerColour]{hyperref}
-\RequirePackage{fontspec,xunicode,eso-pic,graphicx,caption,ifthen,titlesec,fontawesome,eurosym}
+\RequirePackage{fontspec,xunicode,eso-pic,graphicx,caption,ifthen,titlesec,fontawesome,eurosym,listings,pstricks}
 
 \setlength\parindent{0in}
 \defaultfontfeatures{Mapping=tex-text}
@@ -57,3 +56,52 @@
 
 \titleformat{\paragraph}
   [{runin}]{\bf\fontspec{Avenir LT 65 Medium}\color{bannerColour}}{}{}{}
+
+
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{10} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{10}  % for normal
+
+% Custom colors
+\usepackage{color}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+% Python style for highlighting
+\newcommand\pythonstyle{\lstset{
+  language=Python,
+  basicstyle=\ttfamily,
+  otherkeywords={self},
+  keywordstyle=\ttfamily\color{deepblue},
+  emph={MyClass,__init__, __del__},
+  emphstyle=\ttfamily\color{deepred},
+  stringstyle=\color{deepgreen},
+  commentstyle=\color{gray},
+  showstringspaces=false,
+  literate={},
+  firstnumber=0,
+  numbers=left,
+  xleftmargin=2em,
+  stepnumber=1,
+  numberstyle=\tiny\color{gray},
+  captionpos=b,
+  moredelim=[s][\color{gray}\itshape]{@}{\ } % Decorators
+}}
+
+\renewcommand{\lstlistingname}{Codevoorbeeld}
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+  \pythonstyle
+  \lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+  \pythonstyle
+  \lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
