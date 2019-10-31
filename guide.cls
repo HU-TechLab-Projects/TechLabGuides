@@ -45,6 +45,12 @@
 }
 \pagestyle{empty}
 
+\def\title#1{\gdef\@title{#1}
+  \newwrite\tempfile
+  \immediate\openout\tempfile=\jobname.tit
+  \immediate\write\tempfile{#1}
+  \immediate\closeout\tempfile }
+
 \newlength\titleindent
 \setlength\titleindent{1cm}
 
