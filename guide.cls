@@ -39,8 +39,8 @@
 \put(0.6,0.5){\includegraphics{banner/TuringLabGuide.pdf}}
 \put(17.6,1.8){\includegraphics[scale=0.2]{banner/PCB.pdf}}
 \psline[linecolor=white](7.2,0.25)(7.2,3)
-\rput[rb](20,0.5){\color{white}\Huge \fontspec{Avenir LT 65 Medium}\@title}
-\rput[rb](4.5,0.575){\color{white}\Large \@level}
+\put(8,0.5){\hbox to 12cm{\hfill\color{white}\Huge \fontspec{Avenir LT 65 Medium}\@title}}
+\put(3.0,0.575){\color{white}\Large \@level}
 \end{pspicture}
 }
 \pagestyle{empty}
