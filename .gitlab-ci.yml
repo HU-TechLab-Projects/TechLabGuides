@@ -1,0 +1,13 @@
+image: jpbernius/xelatex
+
+stages:
+- deploy
+
+pages:
+  stage: deploy
+  script:
+  - apt-get install --yes -no-install-recommends pdftk
+  - make
+  artifacts:
+    paths:
+      - public

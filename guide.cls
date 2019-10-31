@@ -11,7 +11,7 @@
 \definecolor{bannerColour}{rgb}{0.46,0.31,0.48}
 \def\bannerColour{bannerColour}
 
-\RequirePackage[unicode, bookmarks, colorlinks, breaklinks, urlcolor=bannerColour]{hyperref}
+\RequirePackage[unicode, bookmarks, colorlinks, breaklinks, urlcolor=bannerColour, pdfusetitle]{hyperref}
 \RequirePackage{fontspec,xunicode,eso-pic,graphicx,caption,ifthen,titlesec,fontawesome,eurosym,listings,pstricks}
 
 \setlength\parindent{0in}
