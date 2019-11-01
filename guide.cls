@@ -124,3 +124,34 @@
 
 % Python for inline
 \newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+
+% Bash style
+\newcommand\bashstyle{\lstset{
+  language=Bash,
+  basicstyle=\ttfamily,
+  keywordstyle=\ttfamily\color{deepblue},
+  emphstyle=\ttfamily\color{deepred},
+  stringstyle=\color{deepgreen},
+  commentstyle=\color{gray},
+  showstringspaces=false,
+  literate={},
+  xleftmargin=2em,
+  stepnumber=1,
+  captionpos=b,
+}}
+
+% Bash environment
+\lstnewenvironment{bash}[1][]
+{
+  \bashstyle
+  \lstset{#1}
+}
+{}
+
+% Bash for external files
+\newcommand\bashexternal[2][]{{
+  \bashstyle
+  \lstinputlisting[#1]{#2}}}
+
+% Bash for inline
+\newcommand\bashinline[1]{{\bashstyle\lstinline!#1!}}
