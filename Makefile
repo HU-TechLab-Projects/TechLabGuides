@@ -19,6 +19,7 @@ all: $(PDFS)
 
 
 %.pdf: %.tex banner/PCB.pdf banner/TuringLabGuide.pdf guide.cls
+	@echo [35mTypesetting $< ...[0m
 	xelatex --interaction=batchmode --halt-on-error $<
 	xelatex --interaction=batchmode --halt-on-error $<
 
