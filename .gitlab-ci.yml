@@ -1,4 +1,4 @@
-image: jpbernius/xelatex
+image:  registry.gitlab.com/hu-hbo-ict/turing-lab/guides
 
 stages:
 - deploy
