@@ -1,3 +1,4 @@
+SHELL = /bin/bash
 SOURCES = $(shell echo *.tex)
 PDFS = $(SOURCES:tex=pdf)
 
