@@ -12,14 +12,20 @@
 \def\bannerColour{bannerColour}
 
 \RequirePackage[unicode, bookmarks, colorlinks, breaklinks, urlcolor=bannerColour, pdfusetitle]{hyperref}
-\RequirePackage{fontspec,xunicode,eso-pic,graphicx,caption,ifthen,titlesec,fontawesome,eurosym,listings,pstricks}
+\RequirePackage{fontspec,xunicode,eso-pic,graphicx,caption,ifthen,titlesec,eurosym,listings,tikz}
 
 \setlength\parindent{0in}
 \defaultfontfeatures{Mapping=tex-text}
 
-\setromanfont {Avenir LT 45 Book}
-\setsansfont {Avenir LT 45 Book}
-\setmonofont[Scale=0.8]{Envy Code R}
+\setromanfont[Extension = .ttf, Path=fonts/, BoldFont=NunitoSans-Bold, ItalicFont=NunitoSans-LightItalic, BoldItalicFont=NunitoSans-BoldItalic]{NunitoSans-Light}
+\setsansfont[Extension = .ttf, Path=fonts/, BoldFont=NunitoSans-Bold, ItalicFont=NunitoSans-LightItalic, BoldItalicFont=NunitoSans-BoldItalic]{NunitoSans-Light}
+\setmonofont[Extension = .ttf, Path=fonts/, Scale=0.8]{Envy Code R}
+\newfontfamily{\headingFont}{NunitoSans-Regular}[Extension = .ttf, Path=fonts/]
+
+\newfontfamily{\awesome}{Font Awesome 5 Free-Regular-400}[Extension = .otf, Path=fonts/]
+\newfontfamily{\awesomeB}{Font Awesome 5 Free-Solid-900}[Extension = .otf, Path=fonts/]
+\def\faStarO{\awesome\symbol{61445}}
+\def\faStar{\awesomeB\symbol{61445}}
 
 \def\@zeroStars{\faStarO\faStarO\faStarO}
 \def\@oneStar{\faStar\faStarO\faStarO}
@@ -33,16 +39,19 @@
                     {\let\@level\@zeroStars}}}}}
 \level{0}
 
+\usetikzlibrary{shapes.geometric}
 \AddToShipoutPictureFG{
-\begin{pspicture}(0,-26.5)
-\psframe*[fillstyle=solid,fillcolor=bannerColour,linecolor=bannerColour](-5,0)(30,3.8)
-\put(0.6,0.5){\includegraphics{banner/TuringLabGuide.pdf}}
-\put(17.6,1.8){\includegraphics[scale=0.2]{banner/PCB.pdf}}
-\psline[linecolor=white](7.2,0.25)(7.2,3)
-\put(8,0.5){\hbox to 12cm{\hfill\color{white}\Huge \fontspec{Avenir LT 65 Medium}\@title}}
-\put(3.0,0.575){\color{white}\Large \@level}
-\end{pspicture}
-}
+  \begin{tikzpicture}[remember picture, overlay, transform shape]
+    \node [anchor=north west, inner sep=0pt] at (current page.north west)
+    { \begin{tikzpicture}[every node/.append style = {anchor=center}]
+        \node[draw,fill=bannerColour,rectangle,minimum width = 21cm,minimum height = 3.6cm,anchor=north west] (banner) at (0,0) {\vphantom{1}};
+        \draw[white,thick] (7.2,-0.25) -- (7.2,-3.45);
+        \node[align=left, text width= 4cm, anchor=west] at (2.8,-2.7) {\color{white}\Large \@level};
+        \node[align=right, text width= 12cm, anchor=east] at (20.0,-2.7) {\color{white}\Huge \headingFont\@title};
+        \node[align=left, text width= 4cm, anchor=south west] at (0.6,-3.0) {\includegraphics{banner/TuringLabGuide.pdf}};
+        \node[align=right, text width= 4cm, anchor=north east] at (20.8,0) {\includegraphics[scale=0.2]{banner/PCB.pdf}};
+      \end{tikzpicture} };
+  \end{tikzpicture} }
 \pagestyle{empty}
 
 \def\title#1{\gdef\@title{#1}
@@ -55,13 +64,13 @@
 \setlength\titleindent{1cm}
 
 \titleformat{\section}
-  {\fontspec{Avenir LT 65 Medium}\huge\color{bannerColour}}{\llap{\parbox{\titleindent}{\thesection\hfill}}}{0em}{}
+  {\headingFont\huge\color{bannerColour}}{\llap{\parbox{\titleindent}{\thesection\hfill}}}{0em}{}
 
 \titleformat{\subsection}
-  {\fontspec{Avenir LT 65 Medium}\Large\color{bannerColour}}{\llap{\parbox{\titleindent}{\thesubsection\hfill}}}{0em}{}
+  {\headingFont\Large\color{bannerColour}}{\llap{\parbox{\titleindent}{\thesubsection\hfill}}}{0em}{}
 
 \titleformat{\paragraph}
-  [{runin}]{\bf\fontspec{Avenir LT 65 Medium}\color{bannerColour}}{}{}{}
+  [{runin}]{\bf\headingFont\color{bannerColour}}{}{}{}
 
 
 \DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{10} % for bold
