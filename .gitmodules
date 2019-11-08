@@ -1,0 +1,3 @@
+[submodule "docker-xelatex"]
+	path = docker-xelatex
+	url = https://github.com/peikos/docker-xelatex.git
