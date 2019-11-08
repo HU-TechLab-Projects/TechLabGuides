@@ -1,6 +1,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{guide}
 
+\let\@author\@empty
+
 \LoadClassWithOptions{article}
 
 \RequirePackage[table]{xcolor}
@@ -12,7 +14,7 @@
 \def\bannerColour{bannerColour}
 
 \RequirePackage[unicode, bookmarks, colorlinks, breaklinks, urlcolor=bannerColour, pdfusetitle]{hyperref}
-\RequirePackage{fontspec,xunicode,eso-pic,graphicx,caption,ifthen,titlesec,eurosym,listings,tikz}
+\RequirePackage{fontspec,xunicode,eso-pic,graphicx,caption,titlesec,eurosym,listings,tikz}
 
 \setlength\parindent{0in}
 \defaultfontfeatures{Mapping=tex-text}
@@ -32,11 +34,11 @@
 \def\@twoStars{\faStar\faStar\faStarO}
 \def\@threeStars{\faStar\faStar\faStar}
 
-\def\level#1{\ifthenelse{\equal{#1}{0}}{\let\@level\@zeroStars}
-              {\ifthenelse{\equal{#1}{1}}{\let\@level\@oneStar}
-                {\ifthenelse{\equal{#1}{2}}{\let\@level\@twoStars}
-                  {\ifthenelse{\equal{#1}{3}}{\let\@level\@threeStars}
-                    {\let\@level\@zeroStars}}}}}
+\def\level#1{\ifnum#1=0\let\@level\@zeroStars
+               \else\ifnum#1=1\let\@level\@oneStar
+                 \else\ifnum#1=2\let\@level\@twoStars
+                   \else\ifnum#1=3\let\@level\@threeStars
+                     \else\let\@level\@zeroStars\fi\fi\fi\fi}
 \level{0}
 
 \usetikzlibrary{shapes.geometric}
@@ -50,6 +52,8 @@
         \node[align=right, text width= 12cm, anchor=east] at (20.0,-2.7) {\color{white}\Huge \headingFont\@title};
         \node[align=left, text width= 4cm, anchor=south west] at (0.6,-3.0) {\includegraphics{banner/TuringLabGuide.pdf}};
         \node[align=right, text width= 4cm, anchor=north east] at (20.8,0) {\includegraphics[scale=0.2]{banner/PCB.pdf}};
+        \node[align=right, text width= 12cm, anchor=north east] at (20.7,-29.2) {\ifx\@author\@empty\else\color{bannerColour}\scriptsize\it Deze guide is mogelijk gemaakt door \@author\fi};
+
       \end{tikzpicture} };
   \end{tikzpicture} }
 \pagestyle{empty}
@@ -120,3 +124,34 @@
 
 % Python for inline
 \newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+
+% Bash style
+\newcommand\bashstyle{\lstset{
+  language=Bash,
+  basicstyle=\ttfamily,
+  keywordstyle=\ttfamily\color{deepblue},
+  emphstyle=\ttfamily\color{deepred},
+  stringstyle=\color{deepgreen},
+  commentstyle=\color{gray},
+  showstringspaces=false,
+  literate={},
+  xleftmargin=2em,
+  stepnumber=1,
+  captionpos=b,
+}}
+
+% Bash environment
+\lstnewenvironment{bash}[1][]
+{
+  \bashstyle
+  \lstset{#1}
+}
+{}
+
+% Bash for external files
+\newcommand\bashexternal[2][]{{
+  \bashstyle
+  \lstinputlisting[#1]{#2}}}
+
+% Bash for inline
+\newcommand\bashinline[1]{{\bashstyle\lstinline!#1!}}
